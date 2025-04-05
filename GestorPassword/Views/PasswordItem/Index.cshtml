@@ -1,0 +1,41 @@
+﻿@model IEnumerable<GestorPassword.Core.Application.ViewModel.PasswordItem.PasswordItemViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary"><i class='bx bx-plus-circle'></i> Create New</a>
+</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <hr/>
+                        <p class="card-text">
+                            <strong>Email:</strong> @Html.DisplayFor(modelItem => item.Email) <br />
+                            <strong>Password:</strong> @Html.DisplayFor(modelItem => item.Password) <br />
+                            <strong>Fecha Registro:</strong> @Html.DisplayFor(modelItem => item.FechaRegustro)
+                        </p>
+                        <a asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-outline-primary"><i class='bx bxs-edit'></i> Edit</a> |
+                        <a asp-action="Details" asp-route-Id="@item.Id" class="btn btn-outline-info"><i class='bx bx-info-circle'></i> Details</a> |
+                        <a asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-outline-danger"><i class='bx bx-message-alt-x'></i> Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

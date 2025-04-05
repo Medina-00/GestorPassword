@@ -1,0 +1,37 @@
+﻿@model GestorPassword.Core.Application.ViewModel.PasswordItem.SavePasswordItemViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="d-flex justify-content-center align-items-center" >
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+            <h1 class="card-title text-center">Detalle del Item</h1>
+            <h4 class="card-subtitle text-center mb-4">Informaciones </h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Id)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Id)</dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Name)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Email)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Password)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Password)</dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.UserId)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.UserId)</dd>
+            </dl>
+            <form asp-action="Details">
+                <input type="submit" value="Edit" class="btn btn-outline-primary" /> |
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

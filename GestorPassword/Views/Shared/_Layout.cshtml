@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Http
+@using GestorPassword.Core.Application.Dtos.Account.Response
+@using GestorPassword.Core.Application.Helpers;
+@using GestorPassword.Core.Application.ViewModel.User
+
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var User = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GestorPassword</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilos.css" asp-append-version="true" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=fxFxDuWsCTtA&format=png&color=000000" type="image/x-icon">
+
+
+    <link rel="stylesheet" href="~/GestorPassword.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="@(User != null ? "PasswordItem" : "User")" asp-action="@(User!= null ? "Index" : "Login")"><strong><i class='bx bx-home-circle'></i>  GestorPassword</strong> </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @if (User != null)
+                    {
+
+                        <ul class="navbar-nav flex-grow-1">
+                           
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="PasswordItem" asp-action="Index"><strong>Passwords</strong> </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="User" asp-action="Edit" asp-route-id="@User.Id"> <strong><i class='bx bx-user-circle'></i> Edit User</strong></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="User" asp-action="LogOut">
+                                    <strong>
+                                        <div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>
+                                        LogOut <i class='bx bx-log-out'></i>
+                                    </strong>
+                                </a>
+                            </li>
+                        </ul>
+                            
+
+
+                        
+                    }
+                    @if (User == null)
+                    {
+
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="User" asp-action="Create"><strong>Sing Up <i class='bx bxs-user-plus'></i></strong> </a>
+                            </li>
+                        </ul>
+
+
+
+
+                    }
+
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿@model GestorPassword.Core.Application.ViewModel.User.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+            <h1 class="card-title text-center">Login</h1>
+            <h4 class="card-subtitle text-center mb-4">INTRODUZCA SUS CREDENCIALES !!</h4>
+            <hr />
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @if (Model.HasError)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p>@Model.Error</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Correo" class="control-label"></label>
+                    <input asp-for="Correo" class="form-control" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary">Log In <i class='bx bx-log-in'></i></button> | 
+                    <a class="small" asp-controller="User" asp-action="ForgotPassword">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

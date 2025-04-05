@@ -1,0 +1,51 @@
+﻿@model GestorPassword.Core.Application.ViewModel.PasswordItem.SavePasswordItemViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="d-flex justify-content-center align-items-center" >
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+            <h1 class="card-title text-center">Editando!!</h1>
+            <h4 class="card-subtitle text-center mb-4">Introduzca las nuevas informaciones</h4>
+            <hr />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input readonly asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <input asp-for="UserId" type="hidden" class="form-control" />
+                <form asp-action="Delete">
+                    <input type="submit" value="Edit" class="btn btn-outline-success" /> |
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                </form>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
